@@ -1,0 +1,16 @@
+<h1>This is Vote Level</h1>
+<ul>
+    {% for item in vote_ls %}
+        {% for key, value in item.items %}
+            {% for question in question_ls %}
+                {% if question.question_text == key %}
+                    {% if value == "warm" %}
+                        <li><a href="{% url 'polls:vote' question.id %}">warm</a>: {{ key }}</li>
+                    {% else %}
+                        <li><a href="{% url 'polls:vote' question.id %}">Hot</a>: {{ key }}</li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+</ul>

@@ -45,10 +45,22 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 def listvote(request):
-    question = get_object_or_404(Question)
-    choices = Choice.objects.filter(question=question)
+    votelevel  = []
+    Question_ls = Question.objects.all()
+
+    for q_id in Question_ls:
+        sum = 0
+        choice_ls = Choice.objects.filter(question = q_id)
+        print(choice_ls)
+        for choice in choice_ls:
+            print(choice.votes)
+            sum += choice.votes
+        if (sum > 10 and sum <50):
+            votelevel.append({f"{q_id}": "warm"})
+        elif (sum) > 50:
+            votelevel.append({f"{q_id}": "hot"})
+        print(votelevel)
+
+    return render(request,"polls/votelevel.html",context = {"question_ls" : Question_ls,
+                                                           "vote_ls": votelevel})   
     
-    for choice in choices:
-        print(choice.votes)  
-    
-    return render(request, "polls/votelevel.html", {"vote_ls": c})
