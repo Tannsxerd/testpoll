@@ -58,3 +58,12 @@ class usertest(LiveServerTestCase):
         self.assertIn("testquestion1",[e.text for e in q_in])
         time.sleep(4)
         
+    #user get in main webpage
+    #user find categories game store and medicine store
+    #user click in to game store 
+    #user find polls 
+    #user get in to private polls of game store 
+    #user votes
+    #user go back to main web
+    #user click medicine store
+    #user get in to private polls of medicine store

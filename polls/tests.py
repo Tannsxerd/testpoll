@@ -1,6 +1,7 @@
 from django.test import TestCase,Client
 from . models import Question , Choice
 from django.utils.timezone import now, timedelta
+from . import views
 # Create your tests here.
 
 class vote_test(TestCase):
@@ -43,12 +44,12 @@ class vote_test(TestCase):
     #             self.assertIn(key_res, level_dict)
     #             self.assertEqual(value_res, level_dict[key_res])
     def test_private(self):
-        self.client = Client()
 
         base_url = "/polls/private/"
         response = self.client.get(base_url)
         print(response)
         Q_ls = response.context["private_list"]
+        print("asdasd")
         ls = [e.text for e in Q_ls]
         self.assertIn("testquestion1",ls)
         
