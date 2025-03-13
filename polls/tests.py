@@ -45,10 +45,10 @@ class vote_test(TestCase):
     #             self.assertEqual(value_res, level_dict[key_res])
     def test_private(self):
 
-        base_url = "/polls/private/"
-        response = self.client.get(base_url)
+        self.base_url = "/polls/private/"
+        response = self.client.get(self.base_url)
         print(response)
-        Q_ls = response.context["private_list"]
+        Q_ls = response.context["privatelist"]
         print("asdasd")
         ls = [e.text for e in Q_ls]
         self.assertIn("testquestion1",ls)

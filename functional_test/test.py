@@ -58,10 +58,17 @@ class usertest(LiveServerTestCase):
         self.assertIn("testquestion1",[e.text for e in q_in])
         time.sleep(4)
         
+    def test_category_private(self):
+       store_ls = None;
     #user get in main webpage
+       self.browser.get(f"{self.live_server_url}/polls/categoty/private")
     #user find categories game store and medicine store
     #user click in to game store 
+        for element in store_ls:
+            if element.text == "game store "
+                element.click
     #user find polls 
+
     #user get in to private polls of game store 
     #user votes
     #user go back to main web
