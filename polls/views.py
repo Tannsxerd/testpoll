@@ -10,10 +10,10 @@ class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
-
+    
     def get_queryset(self):
         """Return the last five published questions."""
-        return Question.objects.order_by('-pub_date')[:5]
+        return Question.objects.filter(private = False)
 
 
 class DetailView(generic.DetailView):
@@ -64,3 +64,11 @@ def listvote(request):
     return render(request,"polls/votelevel.html",context = {"question_ls" : Question_ls,
                                                            "vote_ls": votelevel})   
     
+def private_view(request):
+    private_obj= Question.objects.all()
+    private_ls = []
+    for q in private_obj:
+        if q.private :
+            private_ls.append(q)
+
+    return  render(request,"polls/private_page.html",context = {"private_ls": private_ls } )
