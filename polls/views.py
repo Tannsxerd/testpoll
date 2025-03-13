@@ -71,4 +71,4 @@ def private_view(request):
         if q.private :
             private_ls.append(q)
 
-    return  render(request,"polls/private_page.html",context = {"private_ls": private_ls } )
+    return  render(request,"polls/private_page.html",context = {"private_list": private_ls } )
