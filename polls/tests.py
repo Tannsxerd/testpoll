@@ -42,15 +42,13 @@ class vote_test(TestCase):
 
     #             self.assertIn(key_res, level_dict)
     #             self.assertEqual(value_res, level_dict[key_res])
-    # def test_private(self):
-    #     self.client = Client()
-    #     self.question1 = Question.objects.create(question_text="testquestion1", pub_date=now(),private = True)
-    #     self.choice1 = Choice.objects.create(question=self.question1, choice_text="Choice 1", votes=11)
+    def test_private(self):
+        self.client = Client()
 
-    #     base_url = "/polls/private/"
-    #     response = self.client.get(base_url)
-    #     print(response)
-    #     Q_ls = response.context["private_list"]
-    #     ls = [e.text for e in Q_ls]
-    #     self.assertIn("testquestion1",ls)
+        base_url = "/polls/private/"
+        response = self.client.get(base_url)
+        print(response)
+        Q_ls = response.context["private_list"]
+        ls = [e.text for e in Q_ls]
+        self.assertIn("testquestion1",ls)
         
