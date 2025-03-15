@@ -1,6 +1,6 @@
 <ul>
-{% for e in private_list %}
-    <li><a>{{ e.question_text }}</a></li>
+{% for e in privatelist %}
+    <li><a href="{% url 'polls:vote' e.id %}">{{ e.question_text }}</a></li>
 {% endfor %}
 </ul>
 

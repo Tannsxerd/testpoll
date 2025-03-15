@@ -52,25 +52,24 @@ class usertest(LiveServerTestCase):
         self.question1 = Question.objects.create(question_text="testquestion1", pub_date=now(),private = True)
         self.choice1 = Choice.objects.create(question=self.question1, choice_text="Choice 1", votes=11)
 
-        #open private  private page
+        #แทนเปิด private page
         self.browser.get(f"{self.live_server_url}/private")
-        q_in =  self.browser.find_elements(By.TAG_NAME, "a")
-        self.assertIn("testquestion1",[e.text for e in q_in])
-        time.sleep(4)
-        
-    def test_category_private(self):
-       store_ls = None;
-    #user get in main webpage
-       self.browser.get(f"{self.live_server_url}/polls/categoty/private")
-    #user find categories game store and medicine store
-    #user click in to game store 
-        for element in store_ls:
-            if element.text == "game store "
-                element.click
-    #user find polls 
 
-    #user get in to private polls of game store 
-    #user votes
-    #user go back to main web
-    #user click medicine store
-    #user get in to private polls of medicine store
+        q_in =  self.browser.find_elements(By.TAG_NAME, "a")
+        ls = [e.text for e in q_in]
+        #แทนเจอ testquestion1
+        self.assertIn("testquestion1",ls)
+        time.sleep(2)
+
+        #แทนกดเข้าไปใน  link คำถาม
+        for link in q_in:
+            link.click()
+            time.sleep(2)  
+
+
+            self.assertIn("/vote/", self.browser.current_url)
+
+            # แทนกดย้อนกลับไปหน้าก่อนหน้า
+            self.browser.back()
+            time.sleep(2)
+        

@@ -46,12 +46,15 @@ def vote(request, question_id):
 
 def listvote(request):
     votelevel  = []
+    #ดึง object คำถาม
     Question_ls = Question.objects.all()
 
     for q_id in Question_ls:
         sum = 0
+        #ดึง choice ที่เกี่ยวกับ คำถาม
         choice_ls = Choice.objects.filter(question = q_id)
         print(choice_ls)
+        #บวก เพื่อ check จำนวน vote
         for choice in choice_ls:
             print(choice.votes)
             sum += choice.votes
@@ -60,15 +63,17 @@ def listvote(request):
         elif (sum) > 50:
             votelevel.append({f"{q_id}": "hot"})
         print(votelevel)
-
+    #ส่ง context ไปยัง html
     return render(request,"polls/votelevel.html",context = {"question_ls" : Question_ls,
                                                            "vote_ls": votelevel})   
     
 def private_view(request):
+    #ดึง object คำถามทั้งหมด
     private_obj= Question.objects.all()
     private_ls = []
     for q in private_obj:
+        #ดึงคำถามที่มี PRIVATE = TRUE
         if q.private :
             private_ls.append(q)
-
-    return  render(request,"polls/private_page.html",context = {"private_list": private_ls } )
+    #ส่ง context  privatelistไปยัง html
+    return  render(request,"polls/private_page.html",context = {"privatelist": private_ls }, )
